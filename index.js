@@ -3,7 +3,8 @@ const cors = require('cors')
 const axios = require('axios')
 const bodyParser = require('body-parser')
 const Puppeteer = require('puppeteer');
-const token = "AAAAAAAAAAAAAAAAAAAAAATViQEAAAAAAa7pcajwx0xx5JZxeMMjV1UgryI%3Dd5L5P8fdKEpDz1XSxIhqgrqcgx10AVfyoLkpzSFWwrvPAtz4Bb"
+const token = process.env.TOKEN
+const port = process.env.PORT
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -74,6 +75,6 @@ app.get('/get/tweets/:userid', (req, res) => {
     ).catch((error) => console.error(error));
 })
 
-app.listen(4000, () => {
+app.listen(port, () => {
     console.log("Server running on port 4000")
 })
