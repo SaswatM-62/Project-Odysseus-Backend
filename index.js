@@ -4,7 +4,7 @@ const axios = require('axios')
 const bodyParser = require('body-parser')
 const Puppeteer = require('puppeteer');
 const app = express();
-const token = "AAAAAAAAAAAAAAAAAAAAAATViQEAAAAAAa7pcajwx0xx5JZxeMMjV1UgryI%3Dd5L5P8fdKEpDz1XSxIhqgrqcgx10AVfyoLkpzSFWwrvPAtz4Bb"
+const token = "Enter token"
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors())
 
