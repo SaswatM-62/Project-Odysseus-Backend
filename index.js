@@ -15,7 +15,6 @@ app.get('/', (req, res) => {
 
 const config = require("./config.json");
 const token = config.token;
-
 app.get('/get/userimage/:username', (req, res) => {
 
     const username = req.params.username
