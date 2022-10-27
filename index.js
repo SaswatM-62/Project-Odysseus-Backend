@@ -3,10 +3,13 @@ const cors = require('cors')
 const axios = require('axios')
 const bodyParser = require('body-parser')
 const Puppeteer = require('puppeteer');
+const port = 4000;
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors())
+app.use(cors({
+    origin: ['https://nohate.netlify.app', 'https://635ad3ff2690297ebc8a1c98--nohate.netlify.app', 'http://localhost:3000', 'http://127.0.0.1:3000']
+}));
 
 app.get('/', (req, res) => {
     res.send("Home")
@@ -27,6 +30,8 @@ app.get('/get/userimage/:username', (req, res) => {
         const url = await page.evaluate(() => document.querySelector('a[href$="/photo"] img').src);
         await browser.close();
         console.log(`${twitterUsername}: ${url}`);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Content-Type', 'application/json');
         res.json({ profileimg: url })
     };
 
@@ -35,20 +40,20 @@ app.get('/get/userimage/:username', (req, res) => {
 
 app.get('/get/user/:username', (req, res) => {
     const username = req.params.username
-    axios.get('https://api.twitter.com/1.1/users/show.json', {
+    axios.get('https://api.twitter.com/2/users/by', {
         params: {
-            'screen_name': 'twitterdev'
+            'usernames': username
         },
         headers: {
             'Authorization': `Bearer ${token}`
         }
     }).then((resp) => {
         console.log(resp.data.data[0])
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Content-Type', 'application/json');
         res.json(resp.data.data[0])
     })
         .catch((error) => console.error(error));
-
 })
 
 
@@ -69,13 +74,13 @@ app.get('/get/tweets/:userid', (req, res) => {
         for (let obj of result) {
             tweets.push(obj.text)
         }
-
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Content-Type', 'application/json');
         res.json({ tweets: tweets })
     }
     ).catch((error) => console.error(error));
 })
 
-app.listen(4000, () => {
+app.listen(port, () => {
     console.log("Server running on port 4000")
 })
