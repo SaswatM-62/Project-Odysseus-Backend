@@ -1,8 +1,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/SaswatM-62/Video-Call-Application-Backend">
-    <img src="images/video-call.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/SaswatM-62/Project-Odysseus-Backend/">
+    <img src="https://i.imgur.com/ZS9hW1d.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Project Odysseus Backend</h3>
