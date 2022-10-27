@@ -9,7 +9,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cors( {
-    origin: '*'
+    origin: ['https://nohate.netlify.app', 'https://635ad3ff2690297ebc8a1c98--nohate.netlify.app', 'http://localhost:3000', 'http://127.0.0.1:3000']
 }));
 
 app.get('/', (req, res) => {
