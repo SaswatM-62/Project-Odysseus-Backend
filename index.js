@@ -13,21 +13,21 @@ app.get('/', (req, res) => {
 })
 
 app.get('/get/userimage/:username', (req, res) => {
-    
+
     const username = req.params.username
 
     getAvatar = async (twitterUsername) => {
-        const browser = await Puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+        const browser = await Puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
         await page.goto(`https://twitter.com/${twitterUsername}`);
         await page.waitForSelector('a[href$="/photo"] img[src]');
-        const url = await page.evaluate(()=>document.querySelector('a[href$="/photo"] img').src);
+        const url = await page.evaluate(() => document.querySelector('a[href$="/photo"] img').src);
         await browser.close();
         console.log(`${twitterUsername}: ${url}`);
-        res.json({profileimg: url})
+        res.json({ profileimg: url })
     };
 
-    getAvatar( username );
+    getAvatar(username);
 })
 
 app.get('/get/user/:username', (req, res) => {
@@ -40,12 +40,12 @@ app.get('/get/user/:username', (req, res) => {
             'Authorization': `Bearer ${token}`
         }
     }).then((resp) => {
-      console.log(resp.data.data[0])
-      res.setHeader('Content-Type', 'application/json');
-      res.json(resp.data.data[0])
-    }) 
-    .catch((error) => console.error(error));
-    
+        console.log(resp.data.data[0])
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp.data.data[0])
+    })
+        .catch((error) => console.error(error));
+
 })
 
 
@@ -59,17 +59,17 @@ app.get('/get/tweets/:userid', (req, res) => {
             'Authorization': `Bearer ${token}`
         }
     }).then((resp) => {
-            console.log(resp.data.data)
-            const tweets = []
-            const result = resp.data.data
+        console.log(resp.data.data)
+        const tweets = []
+        const result = resp.data.data
 
-            for (let obj of result) {
-                tweets.push(obj.text)
-            }
-            
-            res.setHeader('Content-Type', 'application/json');
-            res.json({tweets: tweets})
+        for (let obj of result) {
+            tweets.push(obj.text)
         }
+
+        res.setHeader('Content-Type', 'application/json');
+        res.json({ tweets: tweets })
+    }
     ).catch((error) => console.error(error));
 })
 
