@@ -8,9 +8,7 @@ const port = process.env['PORT']
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(cors({
-    origin: '*'
-}));
+app.use(cors());
 
 app.get('/', (req, res) => {
     res.send("Home")
