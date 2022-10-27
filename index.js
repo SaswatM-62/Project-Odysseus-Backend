@@ -3,8 +3,8 @@ const cors = require('cors')
 const axios = require('axios')
 const bodyParser = require('body-parser')
 const Puppeteer = require('puppeteer');
-const token = process.env.TOKEN
-const port = process.env.PORT
+const token = process.env['TOKEN']
+const port = process.env['PORT']
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
