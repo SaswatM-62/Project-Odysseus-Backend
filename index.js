@@ -28,6 +28,8 @@ app.get('/get/userimage/:username', (req, res) => {
         const url = await page.evaluate(() => document.querySelector('a[href$="/photo"] img').src);
         await browser.close();
         console.log(`${twitterUsername}: ${url}`);
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.setHeader('Content-Type', 'application/json');
         res.json({ profileimg: url })
     };
 
@@ -45,6 +47,7 @@ app.get('/get/user/:username', (req, res) => {
         }
     }).then((resp) => {
       console.log(resp.data.data[0])
+      res.setHeader('Access-Control-Allow-Origin', '*');
       res.setHeader('Content-Type', 'application/json');
       res.json(resp.data.data[0])
     }) 
@@ -69,7 +72,7 @@ app.get('/get/tweets/:userid', (req, res) => {
         for (let obj of result) {
             tweets.push(obj.text)
         }
-
+        res.setHeader('Access-Control-Allow-Origin', '*');
         res.setHeader('Content-Type', 'application/json');
         res.json({ tweets: tweets })
     }
