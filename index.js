@@ -34,20 +34,19 @@ app.get('/get/userimage/:username', (req, res) => {
 
 app.get('/get/user/:username', (req, res) => {
     const username = req.params.username
-    axios.get('https://api.twitter.com/1.1/users/show.json', {
+    axios.get('https://api.twitter.com/2/users/by', {
         params: {
-            'screen_name': 'twitterdev'
+            'usernames': username
         },
         headers: {
             'Authorization': `Bearer ${token}`
         }
     }).then((resp) => {
-        console.log(resp.data.data[0])
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp.data.data[0])
-    })
-        .catch((error) => console.error(error));
-
+      console.log(resp.data.data[0])
+      res.setHeader('Content-Type', 'application/json');
+      res.json(resp.data.data[0])
+    }) 
+    .catch((error) => console.error(error));
 })
 
 
