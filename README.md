@@ -8,7 +8,7 @@
   <h3 align="center">Project Odysseus Backend</h3>
 
   <p align="center">
-    The backend of a video call application built using Express.js and Socket.io
+    The backend for Project Odysseus
     <br />
     <a href="https://github.com/SaswatM-62/Project-Odysseus-Backend/">View Demo</a>
     ·
