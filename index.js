@@ -3,7 +3,8 @@ const cors = require('cors')
 const axios = require('axios')
 const bodyParser = require('body-parser')
 const Puppeteer = require('puppeteer');
-const port = 4000
+const token = process.env["TOKEN"]
+const port = process.env["PORT"]
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -13,9 +14,6 @@ app.get('/', (req, res) => {
     res.send("Home")
 })
 
-
-const config = require("./config.json");
-const token = config.token;
 app.get('/get/userimage/:username', (req, res) => {
 
     const username = req.params.username
